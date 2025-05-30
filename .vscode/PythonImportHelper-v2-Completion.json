@@ -1,0 +1,1091 @@
+[
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "isExtraImport": true,
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "Lexer",
+        "importPath": "core.lexer.lexer",
+        "description": "core.lexer.lexer",
+        "isExtraImport": true,
+        "detail": "core.lexer.lexer",
+        "documentation": {}
+    },
+    {
+        "label": "Lexer",
+        "importPath": "core.lexer.lexer",
+        "description": "core.lexer.lexer",
+        "isExtraImport": true,
+        "detail": "core.lexer.lexer",
+        "documentation": {}
+    },
+    {
+        "label": "ScanState",
+        "importPath": "core.lexer.lexer",
+        "description": "core.lexer.lexer",
+        "isExtraImport": true,
+        "detail": "core.lexer.lexer",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Symbol",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "PRODUCTIONS",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "PRODUCTIONS",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Symbol",
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "isExtraImport": true,
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "core.grammar.item",
+        "description": "core.grammar.item",
+        "isExtraImport": true,
+        "detail": "core.grammar.item",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "core.grammar.item",
+        "description": "core.grammar.item",
+        "isExtraImport": true,
+        "detail": "core.grammar.item",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "core.grammar.item",
+        "description": "core.grammar.item",
+        "isExtraImport": true,
+        "detail": "core.grammar.item",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "core.grammar.item",
+        "description": "core.grammar.item",
+        "isExtraImport": true,
+        "detail": "core.grammar.item",
+        "documentation": {}
+    },
+    {
+        "label": "closure",
+        "importPath": "core.grammar.closure",
+        "description": "core.grammar.closure",
+        "isExtraImport": true,
+        "detail": "core.grammar.closure",
+        "documentation": {}
+    },
+    {
+        "label": "closure",
+        "importPath": "core.grammar.closure",
+        "description": "core.grammar.closure",
+        "isExtraImport": true,
+        "detail": "core.grammar.closure",
+        "documentation": {}
+    },
+    {
+        "label": "closure",
+        "importPath": "core.grammar.closure",
+        "description": "core.grammar.closure",
+        "isExtraImport": true,
+        "detail": "core.grammar.closure",
+        "documentation": {}
+    },
+    {
+        "label": "closure",
+        "importPath": "core.grammar.closure",
+        "description": "core.grammar.closure",
+        "isExtraImport": true,
+        "detail": "core.grammar.closure",
+        "documentation": {}
+    },
+    {
+        "label": "find_state_index",
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "isExtraImport": true,
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "goto",
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "isExtraImport": true,
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "goto",
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "isExtraImport": true,
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "all_symbols",
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "isExtraImport": true,
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Tuple",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "compute_first_follow",
+        "importPath": "core.grammar.first_follow",
+        "description": "core.grammar.first_follow",
+        "isExtraImport": true,
+        "detail": "core.grammar.first_follow",
+        "documentation": {}
+    },
+    {
+        "label": "compute_first_follow",
+        "importPath": "core.grammar.first_follow",
+        "description": "core.grammar.first_follow",
+        "isExtraImport": true,
+        "detail": "core.grammar.first_follow",
+        "documentation": {}
+    },
+    {
+        "label": "build_lr0_states",
+        "importPath": "core.grammar.lr0_states",
+        "description": "core.grammar.lr0_states",
+        "isExtraImport": true,
+        "detail": "core.grammar.lr0_states",
+        "documentation": {}
+    },
+    {
+        "label": "build_lr0_states",
+        "importPath": "core.grammar.lr0_states",
+        "description": "core.grammar.lr0_states",
+        "isExtraImport": true,
+        "detail": "core.grammar.lr0_states",
+        "documentation": {}
+    },
+    {
+        "label": "build_action_goto",
+        "importPath": "core.grammar.action_goto_table",
+        "description": "core.grammar.action_goto_table",
+        "isExtraImport": true,
+        "detail": "core.grammar.action_goto_table",
+        "documentation": {}
+    },
+    {
+        "label": "build_action_goto",
+        "importPath": "core.grammar.action_goto_table",
+        "description": "core.grammar.action_goto_table",
+        "isExtraImport": true,
+        "detail": "core.grammar.action_goto_table",
+        "documentation": {}
+    },
+    {
+        "label": "AstNode",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Identifier",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Program",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "DeclList",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Decl",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Type",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "VarDecl",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "FuncDecl",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ParamList",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Param",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Block",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "StmtList",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "IfStmt",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "WhileStmt",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ForStmt",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ReturnStmt",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ExprStmt",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "BinaryOp",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "UnaryOp",
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "isExtraImport": true,
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "core.error.error",
+        "description": "core.error.error",
+        "isExtraImport": true,
+        "detail": "core.error.error",
+        "documentation": {}
+    },
+    {
+        "label": "Parser",
+        "importPath": "core.parser.parser",
+        "description": "core.parser.parser",
+        "isExtraImport": true,
+        "detail": "core.parser.parser",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "importPath": "core.parse",
+        "description": "core.parse",
+        "isExtraImport": true,
+        "detail": "core.parse",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "kind": 6,
+        "importPath": "core.error.error",
+        "description": "core.error.error",
+        "peekOfCode": "class Error:\n    @staticmethod\n    def build_lexer_error_msg(lexer: Lexer) -> str:\n        for token in lexer.tokens:\n            if token.type != TokenType.UNEXPECTED_TOKEN:\n                continue\n            lines = lexer.buffer[:token.position].splitlines()\n            line = len(lines) if lines else 1\n            col = len(lines[-1]) + 1 if lines else 1\n            line_start: int = lexer.buffer.rfind('\\n', 0, token.position) + 1",
+        "detail": "core.error.error",
+        "documentation": {}
+    },
+    {
+        "label": "build_action_goto",
+        "kind": 2,
+        "importPath": "core.grammar.action_goto_table",
+        "description": "core.grammar.action_goto_table",
+        "peekOfCode": "def build_action_goto(states: list[set[Item]], grammar: list[Production], follow: dict[str, set[TokenType]]):\n    action = {}  # ex. {(state_idx, terminal): action_str}\n    goto_table = {}  # ex. {(state_idx, nonterminal): next_state}\n    for i, I in enumerate(states):\n        for item in I:\n            A = item.production.lhs\n            # SHIFT\n            if item.dot < len(item.production.rhs):\n                sym = item.production.rhs[item.dot]\n                if isinstance(sym, TokenType):",
+        "detail": "core.grammar.action_goto_table",
+        "documentation": {}
+    },
+    {
+        "label": "closure",
+        "kind": 2,
+        "importPath": "core.grammar.closure",
+        "description": "core.grammar.closure",
+        "peekOfCode": "def closure(items: set[Item], grammar: list[Production]) -> set[Item]:\n    closure_set = set(items)\n    changed = True\n    while changed:\n        changed = False\n        new_items = set()\n        for item in closure_set:\n            if item.dot < len(item.production.rhs):\n                symbol = item.production.rhs[item.dot]\n                if isinstance(symbol, str):  # non-terminal",
+        "detail": "core.grammar.closure",
+        "documentation": {}
+    },
+    {
+        "label": "compute_first_follow",
+        "kind": 2,
+        "importPath": "core.grammar.first_follow",
+        "description": "core.grammar.first_follow",
+        "peekOfCode": "def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]], dict[str, set[TokenType]]]:\n    # Initialisation\n    first: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    follow: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    # Supposons un non-terminal de départ S\n    start = grammar[0].lhs\n    follow[start].add(TokenType.EOF)  # $ dans FOLLOW(start)\n    # Calcul de FIRST\n    changed = True\n    while changed:",
+        "detail": "core.grammar.first_follow",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "kind": 6,
+        "importPath": "core.grammar.item",
+        "description": "core.grammar.item",
+        "peekOfCode": "class Item:\n    production: Production\n    dot: int  # position du point dans rhs\n    def __str__(self) -> str:\n        before = ' '.join(str(sym) for sym in self.production.rhs[:self.dot])\n        after  = ' '.join(str(sym) for sym in self.production.rhs[self.dot:])\n        return f\"{self.production.lhs} -> {before}·{(' ' + after) if after else ''}\"",
+        "detail": "core.grammar.item",
+        "documentation": {}
+    },
+    {
+        "label": "build_lr0_states",
+        "kind": 2,
+        "importPath": "core.grammar.lr0_states",
+        "description": "core.grammar.lr0_states",
+        "peekOfCode": "def build_lr0_states(grammar: list[Production]) -> list[set[Item]]:\n    # grammar[0] est S (déjà augmenté); S' ajouté par le code appelant si besoin\n    start_prod = grammar[0]\n    initial_item = Item(start_prod, 0)\n    states = []\n    state0 = closure({initial_item}, grammar)\n    states.append(state0)\n    while True:\n        new_state_added = False\n        for I in states:",
+        "detail": "core.grammar.lr0_states",
+        "documentation": {}
+    },
+    {
+        "label": "Production",
+        "kind": 6,
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "peekOfCode": "class Production:\n    lhs: Symbol\n    rhs: Tuple[Symbol, ...]  # tuple de symboles (non-terminaux ou terminaux)\n    def __init__(self, lhs: Symbol, rhs: Tuple[Symbol, ...]):\n        self.lhs = lhs\n        self.rhs = rhs\n    def __str__(self) -> str:\n        return f\"{self.lhs} -> {' '.join(str(s) for s in self.rhs)}\"\nPRODUCTIONS: list[Production] = [\n    Production('Program', ('DeclList',)),  # 1",
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "Symbol",
+        "kind": 5,
+        "importPath": "core.grammar.production",
+        "description": "core.grammar.production",
+        "peekOfCode": "Symbol = str | TokenType  # union de str et TokenType (Python 3.10+)\nclass Production:\n    lhs: Symbol\n    rhs: Tuple[Symbol, ...]  # tuple de symboles (non-terminaux ou terminaux)\n    def __init__(self, lhs: Symbol, rhs: Tuple[Symbol, ...]):\n        self.lhs = lhs\n        self.rhs = rhs\n    def __str__(self) -> str:\n        return f\"{self.lhs} -> {' '.join(str(s) for s in self.rhs)}\"\nPRODUCTIONS: list[Production] = [",
+        "detail": "core.grammar.production",
+        "documentation": {}
+    },
+    {
+        "label": "ScanState",
+        "kind": 6,
+        "importPath": "core.lexer.lexer",
+        "description": "core.lexer.lexer",
+        "peekOfCode": "class ScanState(Enum):\n    UNINITIALIZED = 0\n    SUCCESS = 1\n    FAILURE = 2\nclass Lexer:\n    keywords: Dict[str, TokenType] = {\n        'type': TokenType.TYPE,\n        'for': TokenType.FOR,\n        'while': TokenType.WHILE,\n        'if': TokenType.IF,",
+        "detail": "core.lexer.lexer",
+        "documentation": {}
+    },
+    {
+        "label": "Lexer",
+        "kind": 6,
+        "importPath": "core.lexer.lexer",
+        "description": "core.lexer.lexer",
+        "peekOfCode": "class Lexer:\n    keywords: Dict[str, TokenType] = {\n        'type': TokenType.TYPE,\n        'for': TokenType.FOR,\n        'while': TokenType.WHILE,\n        'if': TokenType.IF,\n        'else': TokenType.ELSE,\n        'return': TokenType.RETURN,\n        'num': TokenType.NUMBER,\n        'id': TokenType.IDENTIFIER,",
+        "detail": "core.lexer.lexer",
+        "documentation": {}
+    },
+    {
+        "label": "TokenType",
+        "kind": 6,
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "peekOfCode": "class TokenType(Enum):\n    # Keywords\n    TYPE = 1        # type\n    IDENTIFIER = 2  # id\n    FOR = 3         # for\n    WHILE = 4  # while\n    IF = 5  # if\n    ELSE = 6  # else\n    RETURN = 7  # return\n    NUMBER = 8  # num",
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "kind": 6,
+        "importPath": "core.lexer.token",
+        "description": "core.lexer.token",
+        "peekOfCode": "class Token:\n    def __init__(self, type: TokenType, position: int, length: int, value: Optional[str] = None) -> None:\n        self.type: TokenType = type\n        self.position: int = position\n        self.length: int = length\n        self.value: Optional[str] = value\n    def __str__(self) -> str:\n        return f\"Token(type={self.type}, position={self.position}, length={self.length}, value='{self.value}')\"\n    def __repr__(self) -> str:\n        return self.__str__()",
+        "detail": "core.lexer.token",
+        "documentation": {}
+    },
+    {
+        "label": "AstNode",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class AstNode:\n    \"\"\"Base class for all AST nodes.\"\"\"\n    pass\n@dataclass\nclass Identifier(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Identifier({self.token.text})\"\n@dataclass\nclass Literal(AstNode):",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Identifier",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Identifier(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Identifier({self.token.text})\"\n@dataclass\nclass Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.text})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.text})\"\n@dataclass\nclass Program(AstNode):\n    decl_list: Optional[DeclList]\n    def __str__(self):\n        return f\"Program({self.decl_list})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Program",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Program(AstNode):\n    decl_list: Optional[DeclList]\n    def __str__(self):\n        return f\"Program({self.decl_list})\"\n@dataclass\nclass DeclList(AstNode):\n    decls: List[Decl]\n    def __str__(self):\n        return f\"DeclList({self.decls})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "DeclList",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class DeclList(AstNode):\n    decls: List[Decl]\n    def __str__(self):\n        return f\"DeclList({self.decls})\"\n@dataclass\nclass Decl(AstNode):\n    decl: Union[VarDecl, FuncDecl]\n    def __str__(self):\n        return f\"Decl({self.decl})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Decl",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Decl(AstNode):\n    decl: Union[VarDecl, FuncDecl]\n    def __str__(self):\n        return f\"Decl({self.decl})\"\n@dataclass\nclass Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.text})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Type",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.text})\"\n@dataclass\nclass VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "VarDecl",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):\n        return f\"VarDecl(type={self.type_}, name={self.name.text}, init={self.init_expr})\"\n@dataclass\nclass FuncDecl(AstNode):\n    return_type: Type\n    name: Token",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "FuncDecl",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class FuncDecl(AstNode):\n    return_type: Type\n    name: Token\n    params: ParamList\n    body: Block\n    def __str__(self):\n        return f\"FuncDecl(return_type={self.return_type}, name={self.name.text}, params={self.params}, body={self.body})\"\n@dataclass\nclass ParamList(AstNode):\n    params: List[Param]",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ParamList",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class ParamList(AstNode):\n    params: List[Param]\n    def __str__(self):\n        return f\"ParamList({self.params})\"\n@dataclass\nclass Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.text})\"",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Param",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.text})\"\n@dataclass\nclass Block(AstNode):\n    statements: StmtList\n    def __str__(self):\n        return f\"Block({self.statements})\"",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Block",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class Block(AstNode):\n    statements: StmtList\n    def __str__(self):\n        return f\"Block({self.statements})\"\n@dataclass\nclass StmtList(AstNode):\n    statements: List[AstNode]\n    def __str__(self):\n        return f\"StmtList({self.statements})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "StmtList",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class StmtList(AstNode):\n    statements: List[AstNode]\n    def __str__(self):\n        return f\"StmtList({self.statements})\"\n@dataclass\nclass IfStmt(AstNode):\n    condition: AstNode\n    then_branch: AstNode\n    else_branch: Optional[AstNode] = None\n    def __str__(self):",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "IfStmt",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class IfStmt(AstNode):\n    condition: AstNode\n    then_branch: AstNode\n    else_branch: Optional[AstNode] = None\n    def __str__(self):\n        return f\"IfStmt(cond={self.condition}, then={self.then_branch}, else={self.else_branch})\"\n@dataclass\nclass WhileStmt(AstNode):\n    condition: AstNode\n    body: AstNode",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "WhileStmt",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class WhileStmt(AstNode):\n    condition: AstNode\n    body: AstNode\n    def __str__(self):\n        return f\"WhileStmt(cond={self.condition}, body={self.body})\"\n@dataclass\nclass ForStmt(AstNode):\n    init: Optional[AstNode]\n    condition: Optional[AstNode]\n    update: Optional[AstNode]",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ForStmt",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class ForStmt(AstNode):\n    init: Optional[AstNode]\n    condition: Optional[AstNode]\n    update: Optional[AstNode]\n    body: AstNode\n    def __str__(self):\n        return f\"ForStmt(init={self.init}, cond={self.condition}, update={self.update}, body={self.body})\"\n@dataclass\nclass ReturnStmt(AstNode):\n    expr: AstNode",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ReturnStmt",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class ReturnStmt(AstNode):\n    expr: AstNode\n    def __str__(self):\n        return f\"ReturnStmt({self.expr})\"\n@dataclass\nclass ExprStmt(AstNode):\n    expr: AstNode\n    def __str__(self):\n        return f\"ExprStmt({self.expr})\"\n@dataclass",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "ExprStmt",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class ExprStmt(AstNode):\n    expr: AstNode\n    def __str__(self):\n        return f\"ExprStmt({self.expr})\"\n@dataclass\nclass BinaryOp(AstNode):\n    left: AstNode\n    op: Token\n    right: AstNode\n    def __str__(self):",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "BinaryOp",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class BinaryOp(AstNode):\n    left: AstNode\n    op: Token\n    right: AstNode\n    def __str__(self):\n        return f\"BinaryOp({self.left} {self.op.text} {self.right})\"\n@dataclass\nclass UnaryOp(AstNode):\n    op: Token\n    operand: AstNode",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "UnaryOp",
+        "kind": 6,
+        "importPath": "core.parser.ast",
+        "description": "core.parser.ast",
+        "peekOfCode": "class UnaryOp(AstNode):\n    op: Token\n    operand: AstNode\n    def __str__(self):\n        return f\"UnaryOp({self.op.text}{self.operand})\"",
+        "detail": "core.parser.ast",
+        "documentation": {}
+    },
+    {
+        "label": "Parser",
+        "kind": 6,
+        "importPath": "core.parser.parser",
+        "description": "core.parser.parser",
+        "peekOfCode": "class Parser:\n    \"\"\"SLR(1) shift–reduce parser that turns a token stream into an AST.\"\"\"\n    # Convenience inner class: one stack frame holds the LR state\n    # and the semantic value (AstNode or Token) produced for that symbol.\n    @dataclass\n    class _Frame:\n        state: int\n        node: Any          # AstNode | Token | None\n    def __init__(self, tokens: List[Token]) -> None:\n        self.tokens: List[Token] = tokens",
+        "detail": "core.parser.parser",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "kind": 2,
+        "importPath": "core.parse",
+        "description": "core.parse",
+        "peekOfCode": "def parse(buffer: str) -> str:\n    grammar = PRODUCTIONS\n    lexer = Lexer(buffer)\n    tokens = lexer.scan()\n    if lexer.scan_state == ScanState.FAILURE:\n        return Error.build_lexer_error_msg(lexer)\n    parser = Parser(tokens)\n    ast = parser.parse(debug=True)\n    return f\"{ast}\"\ndef print_action_goto(action, goto_table):",
+        "detail": "core.parse",
+        "documentation": {}
+    },
+    {
+        "label": "print_action_goto",
+        "kind": 2,
+        "importPath": "core.parse",
+        "description": "core.parse",
+        "peekOfCode": "def print_action_goto(action, goto_table):\n    print(\"Action Table:\")\n    for (state, terminal), act in action.items():\n        print(f\"State {state}, Terminal {terminal}: {act}\")\n    print(\"\\nGoto Table:\")\n    for (state, nonterminal), next_state in goto_table.items():\n        print(f\"State {state}, Nonterminal {nonterminal}: Goto State {next_state}\")",
+        "detail": "core.parse",
+        "documentation": {}
+    },
+    {
+        "label": "find_state_index",
+        "kind": 2,
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "peekOfCode": "def find_state_index(I: set[Item], C: list[set[Item]]) -> int:\n    for idx, state in enumerate(C):\n        if state == I:\n            return idx\n    return -1\ndef all_symbols(grammar: list[Production]) -> set[Symbol]:\n    symboles = set()\n    for p in grammar:\n        symboles.update(p.rhs)\n    return symboles",
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "all_symbols",
+        "kind": 2,
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "peekOfCode": "def all_symbols(grammar: list[Production]) -> set[Symbol]:\n    symboles = set()\n    for p in grammar:\n        symboles.update(p.rhs)\n    return symboles\ndef goto(I: set[Item], X: Symbol, grammar: list[Production]) -> set[Item]:\n    moved = set()\n    for item in I:\n        if item.dot < len(item.production.rhs) and item.production.rhs[item.dot] == X:\n            moved.add(Item(item.production, item.dot + 1))",
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "goto",
+        "kind": 2,
+        "importPath": "core.tools",
+        "description": "core.tools",
+        "peekOfCode": "def goto(I: set[Item], X: Symbol, grammar: list[Production]) -> set[Item]:\n    moved = set()\n    for item in I:\n        if item.dot < len(item.production.rhs) and item.production.rhs[item.dot] == X:\n            moved.add(Item(item.production, item.dot + 1))\n    return closure(moved, grammar)",
+        "detail": "core.tools",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def main():\n    if len(sys.argv) < 2:\n        print(\"usage: python main.py <token_file>\")\n        sys.exit(1)\n    input_file: str = sys.argv[1]\n    try:\n        with open(input_file, 'r') as file:\n            buffer = file.read()\n        result = parse(buffer)\n        print(result)",
+        "detail": "main",
+        "documentation": {}
+    }
+]
