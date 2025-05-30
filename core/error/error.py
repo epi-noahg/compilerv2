@@ -1,4 +1,4 @@
-from core.lexer.token import TokenType
+from core.lexer.token import TokenType, Token
 from core.lexer.lexer import Lexer
 
 
@@ -65,3 +65,22 @@ class Error:
         )
 
         return msg
+
+    @staticmethod
+    def build_ast_error_msg(token: Token, buffer: str, context: str = "") -> str:
+        line = buffer[:token.position].count('\n') + 1
+        line_start = buffer.rfind('\n', 0, token.position) + 1
+        line_end = buffer.find('\n', token.position)
+        if line_end == -1:
+            line_end = len(buffer)
+
+        col = token.position - line_start + 1
+        snippet = buffer[line_start:line_end]
+        caret_line = ' ' * (col - 1) + '^'
+        return (
+            f"error: AST error at token '{token.value}' {context}\n"
+            f" --> input:{line}:{col}\n"
+            f"  |\n"
+            f"{line} | {snippet}\n"
+            f"  | {caret_line}"
+        )

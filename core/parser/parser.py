@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import List, Tuple, Dict, Any, Optional, Callable
 from dataclasses import dataclass
 
+from core.error.error import Error
 # --- run-time imports kept local to avoid circular dependencies -------------
 from core.lexer.token import Token, TokenType
 from core.grammar.production import Production, PRODUCTIONS
@@ -170,17 +171,12 @@ class Parser:
                 return StmtList([])
             stmt, tail = c
             if isinstance(stmt, Token):
-                raise ValueError(f"[AST Error] Token '{stmt}' in StmtList instead of AST node.")
+                raise SyntaxError(Error.build_ast_error_msg(stmt, self.buffer, context="in StmtList"))
             return StmtList([stmt] + tail.statements)
 
         if p.lhs == "MatchedStmt" and p.rhs == (TokenType.RETURN, 'Expr', TokenType.SEMICOLON):
             _ret, expr, _semi = c
             return ReturnStmt(expr)
-
-        if p.lhs in ("Stmt", "MatchedStmt", "UnmatchedStmt"):
-            if isinstance(c[0], Token):
-                raise ValueError(f"[AST Error] Token '{c[0]}' returned as Stmt instead of AST node.")
-            return c[0]
 
         if p.lhs == "MatchedStmt" and p.rhs == (TokenType.IF, TokenType.LEFT_PAREN, 'Expr', TokenType.RIGHT_PAREN, 'MatchedStmt', TokenType.ELSE, 'MatchedStmt'):
             _if, _lp, cond, _rp, then_m, _else, else_m = c
@@ -202,6 +198,11 @@ class Parser:
             _for, _lp, init, _sc1, cond, _sc2, update, _rp, body = c
             return ForStmt(init, cond, update, body)
 
+        if p.lhs in ("Stmt", "MatchedStmt", "UnmatchedStmt"):
+            if isinstance(c[0], Token):
+                raise SyntaxError(Error.build_ast_error_msg(c[0], self.buffer, context=f"in {p.lhs}"))
+            return c[0]
+
         if p.lhs == "ExprStmt":
             id_tok, assign_tok, expr, _semi = c
             _ensure_index(id_tok)
@@ -210,7 +211,7 @@ class Parser:
 
         if len(p.rhs) == 1 and p.rhs[0] not in (TokenType.MINUS,):
             if isinstance(c[0], Token):
-                raise ValueError(f"[AST Error] Unexpected Token leaked into AST: {c[0]}")
+                raise SyntaxError(Error.build_ast_error_msg(c[0], self.buffer, context=f"as {p.lhs}"))
             return c[0]
 
         if len(p.rhs) == 3 and isinstance(p.rhs[1], TokenType) and p.rhs[1] in {TokenType.PLUS, TokenType.MULTIPLY, TokenType.COMPARE, TokenType.ASSIGN}:
@@ -220,6 +221,10 @@ class Parser:
         if p.lhs == "UnaryExpr" and len(c) == 2:
             op_tok, expr = c
             return UnaryOp(op_tok, expr)
+
+        if p.lhs == "PrimaryExpr" and p.rhs == (TokenType.LEFT_PAREN, 'Expr', TokenType.RIGHT_PAREN):
+            _lp, expr, _rp = c
+            return expr
 
         if p.lhs == "PrimaryExpr" and len(c) == 1:
             return c[0]
