@@ -365,6 +365,14 @@ class AstNode:
 
         return "\n".join(lines)
 
+def _tok_repr(tok: Token) -> str:
+    """
+    Helper function to get a string representation of a token.
+    """
+    if tok.value:
+        return tok.value
+    return SYMBOL_MAP.get(tok.type, tok.type.name.lower())
+
 @dataclass
 class Identifier(AstNode):
     """
@@ -556,6 +564,18 @@ class IfStmt(AstNode):
         """Returns a string representation of the if statement."""
         return f"IfStmt(cond={self.condition}, then={self.then_branch}, else={self.else_branch})"
 
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the if statement.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [prefix + "IfStmt"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        children = [self.condition, self.then_branch] + ([self.else_branch] if self.else_branch else [])
+        for i, ch in enumerate(children):
+            lines.append(ch.pretty(new_indent, i == len(children) - 1))
+        return "\n".join(lines)
+
 @dataclass
 class WhileStmt(AstNode):
     """
@@ -570,6 +590,17 @@ class WhileStmt(AstNode):
     def __str__(self):
         """Returns a string representation of the while statement."""
         return f"WhileStmt(cond={self.condition}, body={self.body})"
+
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the while statement.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [prefix + "WhileStmt"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        lines.append(self.condition.pretty(new_indent, False))
+        lines.append(self.body.pretty(new_indent, True))
+        return "\n".join(lines)
 
 @dataclass
 class ForStmt(AstNode):
@@ -589,6 +620,19 @@ class ForStmt(AstNode):
         """Returns a string representation of the for statement."""
         return f"ForStmt(init={self.init}, cond={self.condition}, update={self.update}, body={self.body})"
 
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the for statement.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [prefix + "ForStmt"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        parts = [self.init, self.condition, self.update, self.body]
+        parts = [p for p in parts if p is not None]
+        for i, ch in enumerate(parts):
+            lines.append(ch.pretty(new_indent, i == len(parts) - 1))
+        return "\n".join(lines)
+
 @dataclass
 class ReturnStmt(AstNode):
     """
@@ -602,6 +646,16 @@ class ReturnStmt(AstNode):
     def __str__(self):
         """Returns a string representation of the return statement."""
         return f"ReturnStmt({self.expr})"
+
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the return statement.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [prefix + "ReturnStmt"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        lines.append(self.expr.pretty(new_indent, True))
+        return "\n".join(lines)
 
 @dataclass
 class ExprStmt(AstNode):
@@ -625,13 +679,24 @@ class BinaryOp(AstNode):
     A binary operation applies an operator to two operands, such as addition,
     multiplication, comparison, or assignment. The result is a new value.
     """
-    left: AstNode   # The left operand expression
-    op: Token       # The operator token (e.g., +, *, ==, =)
-    right: AstNode  # The right operand expression
-
+    left: AstNode
+    op: Token
+    right: AstNode
     def __str__(self):
         """Returns a string representation of the binary operation."""
-        return f"BinaryOp({self.left} {self.op.value} {self.right})"
+        return f"BinaryOp({self.left} {_tok_repr(self.op)} {self.right})"
+
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the binary operation.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [f"{prefix}BinaryOp '{_tok_repr(self.op)}'"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        lines.append(self.left.pretty(new_indent, False))
+        lines.append(self.right.pretty(new_indent, True))
+        return "\n".join(lines)
+
 
 @dataclass
 class UnaryOp(AstNode):
@@ -647,6 +712,17 @@ class UnaryOp(AstNode):
     def __str__(self):
         """Returns a string representation of the unary operation."""
         return f"UnaryOp({self.op.value}{self.operand})"
+
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        """
+        Returns a pretty-printed string representation of the unary operation.
+        """
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines = [f"{prefix}UnaryOp '{_tok_repr(self.op)}'"]
+        new_indent = indent + ("    " if is_last else "│   ")
+        lines.append(self.operand.pretty(new_indent, True))
+        return "\n".join(lines)
+
 
 def closure(items: set[Item], grammar: list[Production]) -> set[Item]:
     """
