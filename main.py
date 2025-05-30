@@ -2,16 +2,6 @@ from parser import parse
 import sys
 
 def main():
-    """
-    Main entry point for the compiler.
-
-    This function:
-    1. Checks command-line arguments for the input file
-    2. Reads the source code from the file
-    3. Passes the source code to the parser
-    4. Prints the result (AST or error message)
-    5. Handles any exceptions that occur during processing
-    """
     # Check if an input file was provided
     if len(sys.argv) < 2:
         print("usage: python main.py <token_file>")

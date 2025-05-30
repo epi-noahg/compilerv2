@@ -2,7 +2,6 @@
 from enum import Enum
 from typing import Optional
 
-
 class TokenType(Enum):
     """
     Enumeration of all token types recognized by the lexer.
@@ -414,7 +413,7 @@ class VarDecl(AstNode):
     AST node representing a variable declaration.
 
     A variable declaration specifies a new variable with a type, name, and
-    optional initializer expression. For example: "type x = 5;"
+    optional initializer expression. For example: "type id = num;"
     """
     type_: Type              # The type of the variable
     name: Token              # The token containing the variable name
@@ -487,7 +486,7 @@ class FuncDecl(AstNode):
     AST node representing a function declaration.
 
     A function declaration defines a new function with a return type, name,
-    parameter list, and body. For example: "type func(type param) { ... }"
+    parameter list, and body. For example: "type id(type id) { ... }"
     """
     return_type: Type    # The return type of the function
     name: Token          # The token containing the function name
@@ -1493,6 +1492,8 @@ def parse(buffer: str) -> str:
     except SyntaxError as e:
         # If a syntax error occurs, return a formatted error message
         return Error.build_parser_error_msg(e, lexer.buffer)
+
+# Helper function to print action and goto tables / first and follow sets
 
 SYMBOL_MAP = {
     TokenType.IDENTIFIER: 'id',
