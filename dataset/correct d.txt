@@ -1,0 +1,7 @@
+type id(type id)
+{
+    if (id)
+        return id;
+    else
+        return id;
+}

@@ -1,0 +1,6 @@
+type id;
+type id(type id)
+{
+    type id = id;
+    return id;
+}

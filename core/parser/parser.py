@@ -18,11 +18,14 @@ from core.parser.ast import (
 # ---------------------------------------------------------------------------
 
 
-def _ensure_index(tok: Token) -> None:
-    """`ast.py` expects a .index attribute; Token provides .position.
-    Add an alias at run-time if missing."""
+def _ensure_index(tok):
     if not hasattr(tok, "index"):
-        setattr(tok, "index", tok.position)
+        if hasattr(tok, "position"):
+            setattr(tok, "index", tok.position)
+        else:
+            # fallback : si pas de position, donne une valeur par défaut ou lève une erreur
+            setattr(tok, "index", -1)
+
 
 
 class Parser:

@@ -1,0 +1,9 @@
+type id(type id)
+{
+    type id = id;
+    for (id; id; id)
+    {
+        id = id + id;
+    }
+    return id;
+}

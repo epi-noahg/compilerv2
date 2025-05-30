@@ -1,0 +1,6 @@
+type id(type id)
+{
+    while (id)
+        id = id * id;
+    return id;
+}
