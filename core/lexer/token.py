@@ -1,36 +1,32 @@
+# core/lexer/token.py
 from typing import Optional
 from enum import Enum
 
 class TokenType(Enum):
-    # Keywords
-    TYPE = 1        # type
-    IDENTIFIER = 2  # id
-    FOR = 3         # for
-    WHILE = 4  # while
-    IF = 5  # if
-    ELSE = 6  # else
-    RETURN = 7  # return
-    NUMBER = 8  # num
+    TYPE = 1
+    IDENTIFIER = 2
+    FOR = 3
+    WHILE = 4
+    IF = 5
+    ELSE = 6
+    RETURN = 7
+    NUMBER = 8
 
-    # Operators
-    COMPARE = 9  # ==
-    ASSIGN = 10  # =
-    PLUS = 11  # +
-    MINUS = 12  # -
-    MULTIPLY = 13  # *
+    COMPARE = 9
+    ASSIGN = 10
+    PLUS = 11
+    MINUS = 12
+    MULTIPLY = 13
 
-    # Separators
-    SEMICOLON = 14  # ;
-    COMMA = 15  # ,
-    LEFT_PAREN = 16  # (
-    RIGHT_PAREN = 17  # )
-    LEFT_BRACE = 18  # {
-    RIGHT_BRACE = 19  # }
+    SEMICOLON = 14
+    COMMA = 15
+    LEFT_PAREN = 16
+    RIGHT_PAREN = 17
+    LEFT_BRACE = 18
+    RIGHT_BRACE = 19
 
-    EOF = 20 # End of File
-
+    EOF = 20
     UNEXPECTED_TOKEN = 21
-
 
 class Token:
     def __init__(self, type: TokenType, position: int, length: int, value: Optional[str] = None) -> None:

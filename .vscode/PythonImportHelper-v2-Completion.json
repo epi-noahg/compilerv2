@@ -80,14 +80,6 @@
         "documentation": {}
     },
     {
-        "label": "TokenType",
-        "importPath": "core.lexer.token",
-        "description": "core.lexer.token",
-        "isExtraImport": true,
-        "detail": "core.lexer.token",
-        "documentation": {}
-    },
-    {
         "label": "Lexer",
         "importPath": "core.lexer.lexer",
         "description": "core.lexer.lexer",
@@ -169,14 +161,6 @@
     },
     {
         "label": "PRODUCTIONS",
-        "importPath": "core.grammar.production",
-        "description": "core.grammar.production",
-        "isExtraImport": true,
-        "detail": "core.grammar.production",
-        "documentation": {}
-    },
-    {
-        "label": "Production",
         "importPath": "core.grammar.production",
         "description": "core.grammar.production",
         "isExtraImport": true,
@@ -751,7 +735,7 @@
         "kind": 2,
         "importPath": "core.grammar.action_goto_table",
         "description": "core.grammar.action_goto_table",
-        "peekOfCode": "def build_action_goto(states: list[set[Item]], grammar: list[Production], follow: dict[str, set[TokenType]]):\n    action = {}  # ex. {(state_idx, terminal): action_str}\n    goto_table = {}  # ex. {(state_idx, nonterminal): next_state}\n    for i, I in enumerate(states):\n        for item in I:\n            A = item.production.lhs\n            # SHIFT\n            if item.dot < len(item.production.rhs):\n                sym = item.production.rhs[item.dot]\n                if isinstance(sym, TokenType):",
+        "peekOfCode": "def build_action_goto(states: list[set[Item]], grammar: list[Production], follow: dict[str, set[TokenType]]):\n    action = {}\n    goto_table = {}\n    for i, I in enumerate(states):\n        for item in I:\n            A = item.production.lhs\n            # SHIFT\n            if item.dot < len(item.production.rhs):\n                sym = item.production.rhs[item.dot]\n                j = find_state_index(goto(I, sym, grammar), states)",
         "detail": "core.grammar.action_goto_table",
         "documentation": {}
     },
@@ -769,7 +753,7 @@
         "kind": 2,
         "importPath": "core.grammar.first_follow",
         "description": "core.grammar.first_follow",
-        "peekOfCode": "def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]], dict[str, set[TokenType]]]:\n    # Initialisation\n    first: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    follow: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    # Supposons un non-terminal de départ S\n    start = grammar[0].lhs\n    follow[start].add(TokenType.EOF)  # $ dans FOLLOW(start)\n    # Calcul de FIRST\n    changed = True\n    while changed:",
+        "peekOfCode": "def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]], dict[str, set[TokenType]]]:\n    first: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    follow: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}\n    nullable: dict[str, bool] = {p.lhs: False for p in grammar}\n    start = grammar[0].lhs\n    follow[start].add(TokenType.EOF)\n    # Compute nullable\n    changed = True\n    while changed:\n        changed = False",
         "detail": "core.grammar.first_follow",
         "documentation": {}
     },
@@ -832,7 +816,7 @@
         "kind": 6,
         "importPath": "core.lexer.token",
         "description": "core.lexer.token",
-        "peekOfCode": "class TokenType(Enum):\n    # Keywords\n    TYPE = 1        # type\n    IDENTIFIER = 2  # id\n    FOR = 3         # for\n    WHILE = 4  # while\n    IF = 5  # if\n    ELSE = 6  # else\n    RETURN = 7  # return\n    NUMBER = 8  # num",
+        "peekOfCode": "class TokenType(Enum):\n    TYPE = 1\n    IDENTIFIER = 2\n    FOR = 3\n    WHILE = 4\n    IF = 5\n    ELSE = 6\n    RETURN = 7\n    NUMBER = 8\n    COMPARE = 9",
         "detail": "core.lexer.token",
         "documentation": {}
     },
@@ -850,7 +834,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class AstNode:\n    def pretty(self, indent: str = \"\", is_last: bool = True) -> str:\n        lines = []\n        prefix = indent + (\"└── \" if is_last else \"├── \")\n        lines.append(prefix + self.__class__.__name__)\n        # Parcours récursif des champs enfants\n        children = [v for v in self.__dict__.values() if isinstance(v, AstNode) or isinstance(v, list)]\n        for i, child in enumerate(children):\n            is_child_last = i == len(children) - 1\n            new_indent = indent + (\"    \" if is_last else \"│   \")",
+        "peekOfCode": "class AstNode:\n    def pretty(self, indent: str = \"\", is_last: bool = True) -> str:\n        lines = []\n        prefix = indent + (\"└── \" if is_last else \"├── \")\n        lines.append(prefix + self.__class__.__name__)\n        children = [v for v in self.__dict__.values() if isinstance(v, AstNode) or isinstance(v, list)]\n        for i, child in enumerate(children):\n            is_child_last = i == len(children) - 1\n            new_indent = indent + (\"    \" if is_last else \"│   \")\n            if isinstance(child, AstNode):",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -859,7 +843,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class Identifier(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Identifier({self.token.text})\"\n@dataclass\nclass Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.text})\"\n@dataclass",
+        "peekOfCode": "class Identifier(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Identifier({self.token.value})\"\n@dataclass\nclass Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.value})\"\n@dataclass",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -868,7 +852,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.text})\"\n@dataclass\nclass Program(AstNode):\n    decl_list: Optional[DeclList]\n    def __str__(self):\n        return f\"Program({self.decl_list})\"\n@dataclass",
+        "peekOfCode": "class Literal(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Literal({self.token.value})\"\n@dataclass\nclass Program(AstNode):\n    decl_list: Optional[DeclList]\n    def __str__(self):\n        return f\"Program({self.decl_list})\"\n@dataclass",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -895,7 +879,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class Decl(AstNode):\n    decl: Union[VarDecl, FuncDecl]\n    def __str__(self):\n        return f\"Decl({self.decl})\"\n@dataclass\nclass Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.text})\"\n@dataclass",
+        "peekOfCode": "class Decl(AstNode):\n    decl: Union[VarDecl, FuncDecl]\n    def __str__(self):\n        return f\"Decl({self.decl})\"\n@dataclass\nclass Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.value})\"\n@dataclass",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -904,7 +888,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.text})\"\n@dataclass\nclass VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):",
+        "peekOfCode": "class Type(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Type({self.token.value})\"\n@dataclass\nclass VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -913,7 +897,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):\n        return f\"VarDecl(type={self.type_}, name={self.name.text}, init={self.init_expr})\"\n@dataclass\nclass FuncDecl(AstNode):\n    return_type: Type\n    name: Token",
+        "peekOfCode": "class VarDecl(AstNode):\n    type_: Type\n    name: Token\n    init_expr: Optional[AstNode]\n    def __str__(self):\n        return f\"VarDecl(type={self.type_}, name={self.name.value}, init={self.init_expr})\"\n@dataclass\nclass FuncDecl(AstNode):\n    return_type: Type\n    name: Token",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -922,7 +906,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class FuncDecl(AstNode):\n    return_type: Type\n    name: Token\n    params: ParamList\n    body: Block\n    def __str__(self):\n        return f\"FuncDecl(return_type={self.return_type}, name={self.name.text}, params={self.params}, body={self.body})\"\n@dataclass\nclass ParamList(AstNode):\n    params: List[Param]",
+        "peekOfCode": "class FuncDecl(AstNode):\n    return_type: Type\n    name: Token\n    params: ParamList\n    body: Block\n    def __str__(self):\n        return f\"FuncDecl(return_type={self.return_type}, name={self.name.value}, params={self.params}, body={self.body})\"\n@dataclass\nclass ParamList(AstNode):\n    params: List[Param]",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -931,7 +915,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class ParamList(AstNode):\n    params: List[Param]\n    def __str__(self):\n        return f\"ParamList({self.params})\"\n@dataclass\nclass Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.text})\"",
+        "peekOfCode": "class ParamList(AstNode):\n    params: List[Param]\n    def __str__(self):\n        return f\"ParamList({self.params})\"\n@dataclass\nclass Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.value})\"",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -940,7 +924,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.text})\"\n@dataclass\nclass Block(AstNode):\n    statements: StmtList\n    def __str__(self):\n        return f\"Block({self.statements})\"",
+        "peekOfCode": "class Param(AstNode):\n    type_: Type\n    name: Token\n    def __str__(self):\n        return f\"Param(type={self.type_}, name={self.name.value})\"\n@dataclass\nclass Block(AstNode):\n    statements: StmtList\n    def __str__(self):\n        return f\"Block({self.statements})\"",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -1012,7 +996,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class BinaryOp(AstNode):\n    left: AstNode\n    op: Token\n    right: AstNode\n    def __str__(self):\n        return f\"BinaryOp({self.left} {self.op.text} {self.right})\"\n@dataclass\nclass UnaryOp(AstNode):\n    op: Token\n    operand: AstNode",
+        "peekOfCode": "class BinaryOp(AstNode):\n    left: AstNode\n    op: Token\n    right: AstNode\n    def __str__(self):\n        return f\"BinaryOp({self.left} {self.op.value} {self.right})\"\n@dataclass\nclass UnaryOp(AstNode):\n    op: Token\n    operand: AstNode",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -1021,7 +1005,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class UnaryOp(AstNode):\n    op: Token\n    operand: AstNode\n    def __str__(self):\n        return f\"UnaryOp({self.op.text}{self.operand})\"",
+        "peekOfCode": "class UnaryOp(AstNode):\n    op: Token\n    operand: AstNode\n    def __str__(self):\n        return f\"UnaryOp({self.op.value}{self.operand})\"",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -1030,7 +1014,7 @@
         "kind": 6,
         "importPath": "core.parser.parser",
         "description": "core.parser.parser",
-        "peekOfCode": "class Parser:\n    \"\"\"SLR(1) shift–reduce parser that turns a token stream into an AST.\"\"\"\n    # Convenience inner class: one stack frame holds the LR state\n    # and the semantic value (AstNode or Token) produced for that symbol.\n    @dataclass\n    class _Frame:\n        state: int\n        node: Any          # AstNode | Token | None\n    def __init__(self, tokens: List[Token]) -> None:\n        self.tokens: List[Token] = tokens",
+        "peekOfCode": "class Parser:\n    @dataclass\n    class _Frame:\n        state: int\n        node: Any\n    def __init__(self, tokens: List[Token]) -> None:\n        self.tokens: List[Token] = tokens\n        if not self.tokens or self.tokens[-1].type is not TokenType.EOF:\n            self.tokens.append(Token(TokenType.EOF,\n                                     self.tokens[-1].position + self.tokens[-1].length if self.tokens else 0,",
         "detail": "core.parser.parser",
         "documentation": {}
     },
@@ -1048,7 +1032,7 @@
         "kind": 2,
         "importPath": "core.parse",
         "description": "core.parse",
-        "peekOfCode": "def print_action_goto(action, goto_table):\n    print(\"Action Table:\")\n    for (state, terminal), act in action.items():\n        print(f\"State {state}, Terminal {terminal}: {act}\")\n    print(\"\\nGoto Table:\")\n    for (state, nonterminal), next_state in goto_table.items():\n        print(f\"State {state}, Nonterminal {nonterminal}: Goto State {next_state}\")",
+        "peekOfCode": "def print_action_goto(action, goto_table):\n    print(\"Action Table:\")\n    for (state, terminal), act in sorted(action.items()):\n        print(f\"State {state}, Terminal {terminal}: {act}\")\n    print(\"\\nGoto Table:\")\n    for (state, nonterminal), next_state in sorted(goto_table.items()):\n        print(f\"State {state}, Nonterminal {nonterminal}: Goto State {next_state}\")",
         "detail": "core.parse",
         "documentation": {}
     },

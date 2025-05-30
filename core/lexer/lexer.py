@@ -1,13 +1,12 @@
+# core/lexer/lexer.py
 from core.lexer.token import Token, TokenType
 from typing import Dict
 from enum import Enum
-
 
 class ScanState(Enum):
     UNINITIALIZED = 0
     SUCCESS = 1
     FAILURE = 2
-
 
 class Lexer:
     keywords: Dict[str, TokenType] = {
@@ -42,10 +41,7 @@ class Lexer:
         self.scan_state: ScanState = ScanState.UNINITIALIZED
 
     def __str__(self) -> str:
-        string: str = ''
-        for token in self.tokens:
-            string += f'{token}\n'
-        return string
+        return '\n'.join(str(token) for token in self.tokens)
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -67,9 +63,9 @@ class Lexer:
                 buffer = buffer[1:]
                 self.position += 1
                 continue
-            
+
             matched = False
-            
+
             for keyword, token_type in self.keywords.items():
                 if buffer.startswith(keyword):
                     add_token(token_type, len(keyword))
@@ -77,17 +73,17 @@ class Lexer:
 
             if matched:
                 continue
-            
+
             for symbol, token_type in self.symbols.items():
                 if buffer.startswith(symbol):
                     add_token(token_type, len(symbol))
                     break
-            
+
             if not matched:
                 add_token(TokenType.UNEXPECTED_TOKEN, 1)
                 self.scan_state = ScanState.FAILURE
                 break
-        
+
         if self.scan_state == ScanState.UNINITIALIZED:
             self.scan_state = ScanState.SUCCESS
         return self.tokens

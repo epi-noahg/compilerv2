@@ -17,57 +17,40 @@ from core.parser.ast import (
 )
 # ---------------------------------------------------------------------------
 
-
 def _ensure_index(tok):
     if not hasattr(tok, "index"):
         if hasattr(tok, "position"):
             setattr(tok, "index", tok.position)
         else:
-            # fallback : si pas de position, donne une valeur par défaut ou lève une erreur
             setattr(tok, "index", -1)
 
 
-
 class Parser:
-    """SLR(1) shift–reduce parser that turns a token stream into an AST."""
-
-    # Convenience inner class: one stack frame holds the LR state
-    # and the semantic value (AstNode or Token) produced for that symbol.
     @dataclass
     class _Frame:
         state: int
-        node: Any          # AstNode | Token | None
+        node: Any
 
     def __init__(self, tokens: List[Token]) -> None:
         self.tokens: List[Token] = tokens
-
-        # Append an explicit EOF token if the caller hasn’t done so
         if not self.tokens or self.tokens[-1].type is not TokenType.EOF:
-            self.tokens.append(
-                Token(TokenType.EOF,
-                      self.tokens[-1].position + self.tokens[-1].length if self.tokens else 0,
-                      0, "")
-            )
+            self.tokens.append(Token(TokenType.EOF,
+                                     self.tokens[-1].position + self.tokens[-1].length if self.tokens else 0,
+                                     0, ""))
 
-        # Build action / goto tables once for this parser instance
-        # (we include an augmented production S' → Program).
         augmented = [Production("S'", ("Program",))] + PRODUCTIONS
         first, follow = compute_first_follow(augmented)
         states = build_lr0_states(augmented)
         self._action, self._goto = build_action_goto(states, augmented, follow)
 
-        # Map "A->αβ" strings (made by build_action_goto) back to Production
         self._prod_map: Dict[str, Production] = {
-            f"{p.lhs}->{''.join(str(x) for x in p.rhs)}": p
+            f"{p.lhs}->{' '.join(str(x.value if isinstance(x, TokenType) else x) for x in p.rhs)}": p
             for p in augmented
         }
 
     def parse(self, debug: bool = False) -> AstNode:
-        """Parse the token stream and return the AST root.
-        Set *debug=True* to see a step-by-step trace of shift/reduce actions."""
         stack: List[Parser._Frame] = [self._Frame(0, None)]
         i: int = 0
-
         while True:
             state = stack[-1].state
             lookahead: Token = self.tokens[i]
@@ -131,9 +114,6 @@ class Parser:
         print(f"{op:<10} {sym:<20}  stack={st}")
 
     def _make_node(self, p: Production, c: List[Any]) -> Any:
-        """Return an AST node (or other semantic value) for production *p* with
-        RHS children *c* (already in left-to-right order)."""
-
         if p.lhs == "Program":
             return Program(c[0] if c else None)
 
@@ -168,7 +148,7 @@ class Parser:
             if not c:
                 return ParamList([])
             param, tail = c
-            return ParamList([param] + tail)
+            return ParamList([param] + (tail if isinstance(tail, list) else []))
 
         if p.lhs == "ParamTail":
             if not c:
@@ -189,37 +169,38 @@ class Parser:
             if not c:
                 return StmtList([])
             stmt, tail = c
+            if isinstance(stmt, Token):
+                raise ValueError(f"[AST Error] Token '{stmt}' in StmtList instead of AST node.")
             return StmtList([stmt] + tail.statements)
 
-        if p.lhs in ("Stmt", "MatchedStmt", "UnmatchedStmt"):
-            return c[0]
-
-        if p.lhs == "MatchedStmt" and len(p.rhs) == 7 and p.rhs[0] is TokenType.IF:
-            _if, _lp, cond, _rp, then_m, _else, else_m = c
-            return IfStmt(cond, then_m, else_m)
-
-        if p.lhs in ("MatchedStmt", "UnmatchedStmt") and p.rhs[0] is TokenType.WHILE:
-            _wh, _lp, cond, _rp, body = c
-            return WhileStmt(cond, body)
-
-        if p.lhs in ("MatchedStmt", "UnmatchedStmt") and p.rhs[0] is TokenType.FOR:
-            (_for, _lp, init, _sc1, cond, _sc2, update, _rp, body) = c
-            return ForStmt(init, cond, update, body)
-
-        if p.lhs == "MatchedStmt" and p.rhs[0] is TokenType.RETURN:
+        if p.lhs == "MatchedStmt" and p.rhs == (TokenType.RETURN, 'Expr', TokenType.SEMICOLON):
             _ret, expr, _semi = c
             return ReturnStmt(expr)
 
-        if p.lhs == "MatchedStmt" and p.rhs[0] in ("VarDecl", "ExprStmt", "Block"):
+        if p.lhs in ("Stmt", "MatchedStmt", "UnmatchedStmt"):
+            if isinstance(c[0], Token):
+                raise ValueError(f"[AST Error] Token '{c[0]}' returned as Stmt instead of AST node.")
             return c[0]
 
-        if p.lhs == "UnmatchedStmt" and p.rhs[0] is TokenType.IF and len(p.rhs) == 5:
+        if p.lhs == "MatchedStmt" and p.rhs == (TokenType.IF, TokenType.LEFT_PAREN, 'Expr', TokenType.RIGHT_PAREN, 'MatchedStmt', TokenType.ELSE, 'MatchedStmt'):
+            _if, _lp, cond, _rp, then_m, _else, else_m = c
+            return IfStmt(cond, then_m, else_m)
+
+        if p.lhs == "UnmatchedStmt" and p.rhs == (TokenType.IF, TokenType.LEFT_PAREN, 'Expr', TokenType.RIGHT_PAREN, 'Stmt'):
             _if, _lp, cond, _rp, stmt = c
             return IfStmt(cond, stmt, None)
 
-        if p.lhs == "UnmatchedStmt" and p.rhs[0] is TokenType.IF and len(p.rhs) == 7:
-            _if, _lp, cond, _rp, then_m, _else, else_um = c
-            return IfStmt(cond, then_m, else_um)
+        if p.lhs == "UnmatchedStmt" and p.rhs == (TokenType.IF, TokenType.LEFT_PAREN, 'Expr', TokenType.RIGHT_PAREN, 'MatchedStmt', TokenType.ELSE, 'UnmatchedStmt'):
+            _if, _lp, cond, _rp, then_m, _else, else_m = c
+            return IfStmt(cond, then_m, else_m)
+
+        if p.lhs in ("MatchedStmt", "UnmatchedStmt") and p.rhs[0] == TokenType.WHILE:
+            _wh, _lp, cond, _rp, body = c
+            return WhileStmt(cond, body)
+
+        if p.lhs in ("MatchedStmt", "UnmatchedStmt") and p.rhs[0] == TokenType.FOR:
+            _for, _lp, init, _sc1, cond, _sc2, update, _rp, body = c
+            return ForStmt(init, cond, update, body)
 
         if p.lhs == "ExprStmt":
             id_tok, assign_tok, expr, _semi = c
@@ -228,9 +209,11 @@ class Parser:
             return ExprStmt(binop)
 
         if len(p.rhs) == 1 and p.rhs[0] not in (TokenType.MINUS,):
+            if isinstance(c[0], Token):
+                raise ValueError(f"[AST Error] Unexpected Token leaked into AST: {c[0]}")
             return c[0]
 
-        if len(p.rhs) == 3 and isinstance(p.rhs[1], TokenType):
+        if len(p.rhs) == 3 and isinstance(p.rhs[1], TokenType) and p.rhs[1] in {TokenType.PLUS, TokenType.MULTIPLY, TokenType.COMPARE, TokenType.ASSIGN}:
             left, op_tok, right = c
             return BinaryOp(left, op_tok, right)
 
@@ -241,7 +224,4 @@ class Parser:
         if p.lhs == "PrimaryExpr" and len(c) == 1:
             return c[0]
 
-        # Add more production rules as needed...
-
-        # Fallback: return first child or None
         return c[0] if c else None
