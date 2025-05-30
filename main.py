@@ -1,31 +1,26 @@
-from core.grammar.production import Production
-from core.grammar.first_follow import compute_first_follow
-from core.grammar.closure import closure
-from core.grammar.lr0_states import build_lr0_states
-from core.grammar.action_goto_table import build_action_goto
-from core.lexer.token import TokenType
-
-SMALL_PRODUCTIONS: list[Production] = [
-    Production('S', ('E',)),
-    Production('E', ('E', TokenType.PLUS, 'T')),
-    Production('E', ('T',)),
-    Production('T', ('T', TokenType.MULTIPLY, 'F')),
-    Production('T', ('F',)),
-    Production('F', (TokenType.LEFT_PAREN, 'E', TokenType.RIGHT_PAREN)),
-    Production('F', (TokenType.IDENTIFIER,)),
-]
+from core.parse import parse
+import traceback
+import sys
 
 
-grammar = SMALL_PRODUCTIONS
-first, follow = compute_first_follow(grammar)
-states = build_lr0_states(grammar)
-action, goto_table = build_action_goto(states, grammar, follow)
-def print_action_goto(action, goto_table):
-    print("Action Table:")
-    for (state, terminal), act in action.items():
-        print(f"State {state}, Terminal {terminal}: {act}")
-    
-    print("\nGoto Table:")
-    for (state, nonterminal), next_state in goto_table.items():
-        print(f"State {state}, Nonterminal {nonterminal}: Goto State {next_state}")
-print_action_goto(action, goto_table)
+def main():
+    if len(sys.argv) < 2:
+        print("usage: python main.py <token_file>")
+        sys.exit(1)
+    input_file: str = sys.argv[1]
+    try:
+        with open(input_file, 'r') as file:
+            buffer = file.read()
+        result = parse(buffer)
+        print(result)
+    except FileNotFoundError:
+        print(f"error: File '{input_file}' not found.")
+        sys.exit(1)
+    except Exception as err:
+        print(f"error: {err}")
+        traceback.print_exc()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
