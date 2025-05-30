@@ -16,12 +16,13 @@ class TokenType(Enum):
     - Special tokens (EOF, UNEXPECTED_TOKEN)
     """
     TYPE = 1
-    IDENTIFIER = 2
-    FOR = 3
-    WHILE = 4
-    IF = 5
-    ELSE = 6
-    RETURN = 7
+    FOR = 2
+    WHILE = 3
+    IF = 4
+    ELSE = 5
+    RETURN = 6
+
+    IDENTIFIER = 7
     NUMBER = 8
 
     COMPARE = 9
@@ -973,6 +974,7 @@ def build_action_goto(states: list[set[Item]], grammar: list[Production], follow
                     # Add the accept action
                     action[(i, TokenType.EOF)] = "accept"
 
+    print_action_goto(action, goto_table)
     return action, goto_table
 
 
@@ -1521,23 +1523,60 @@ def parse(buffer: str) -> str:
         # If a syntax error occurs, return a formatted error message
         return Error.build_parser_error_msg(e, lexer.buffer)
 
+SYMBOL_MAP = {
+    TokenType.IDENTIFIER: 'id',
+    TokenType.NUMBER: 'num',
+    TokenType.SEMICOLON: ';',
+    TokenType.COMMA: ',',
+    TokenType.LEFT_PAREN: '(',
+    TokenType.RIGHT_PAREN: ')',
+    TokenType.LEFT_BRACE: '{',
+    TokenType.RIGHT_BRACE: '}',
+    TokenType.PLUS: '+',
+    TokenType.MINUS: '-',
+    TokenType.MULTIPLY: '*',
+    TokenType.COMPARE: '==',
+    TokenType.ASSIGN: '=',
+    TokenType.EOF: '$',
+}
+
+def _tok(sym):
+    return SYMBOL_MAP.get(sym, sym.name if hasattr(sym, "name") else str(sym))
+
+def print_action_table(action):
+    rows = [ (state, _tok(term), act)
+             for (state, term), act in action.items() ]
+    rows.sort(key=lambda r: (r[0], r[1]))
+
+    w_state = max(len("State"), max(len(str(r[0])) for r in rows))
+    w_sym   = max(len("Sym"),   max(len(r[1])      for r in rows))
+    w_act   = max(len("Action"),max(len(r[2])      for r in rows))
+
+    header = f"{'State'.ljust(w_state)} | {'Sym'.ljust(w_sym)} | {'Action'.ljust(w_act)}"
+    sep    = f"{'-'*w_state}-+-{'-'*w_sym}-+-{'-'*w_act}"
+    print("\n=== ACTION TABLE ===")
+    print(header)
+    print(sep)
+    for s, sym, act in rows:
+        print(f"{str(s).ljust(w_state)} | {sym.ljust(w_sym).lower()} | {act.ljust(w_act)}")
+
+def print_goto_table(goto_table):
+    rows = [ (state, nt, nxt)
+             for (state, nt), nxt in goto_table.items() ]
+    rows.sort(key=lambda r: (r[0], r[1]))
+
+    w_state = max(len("State"), max(len(str(r[0])) for r in rows))
+    w_nt    = max(len("NonT"),  max(len(r[1])      for r in rows))
+    w_nxt   = max(len("Next"),  max(len(str(r[2])) for r in rows))
+
+    header = f"{'State'.ljust(w_state)} | {'NonT'.ljust(w_nt)} | {'Next'.ljust(w_nxt)}"
+    sep    = f"{'-'*w_state}-+-{'-'*w_nt}-+-{'-'*w_nxt}"
+    print("\n=== GOTO TABLE ===")
+    print(header)
+    print(sep)
+    for s, nt, nxt in rows:
+        print(f"{str(s).ljust(w_state)} | {nt.ljust(w_nt)} | {str(nxt).ljust(w_nxt)}")
+
 def print_action_goto(action, goto_table):
-    """
-    Utility function to print the ACTION and GOTO tables for debugging.
-
-    This function displays the contents of the LR parsing tables in a readable format,
-    which is useful for understanding how the parser makes decisions.
-
-    Args:
-        action: The ACTION table mapping (state, terminal) to actions
-        goto_table: The GOTO table mapping (state, non-terminal) to next states
-    """
-    # Print the ACTION table
-    print("Action Table:")
-    for (state, terminal), act in sorted(action.items()):
-        print(f"State {state}, Terminal {terminal}: {act}")
-
-    # Print the GOTO table
-    print("\nGoto Table:")
-    for (state, nonterminal), next_state in sorted(goto_table.items()):
-        print(f"State {state}, Nonterminal {nonterminal}: Goto State {next_state}")
+    print_action_table(action)
+    print_goto_table(goto_table)
