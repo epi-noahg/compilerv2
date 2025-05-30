@@ -6,8 +6,29 @@ from core.lexer.token import Token
 
 
 class AstNode:
-    """Base class for all AST nodes."""
-    pass
+    def pretty(self, indent: str = "", is_last: bool = True) -> str:
+        lines = []
+        prefix = indent + ("└── " if is_last else "├── ")
+        lines.append(prefix + self.__class__.__name__)
+
+        # Parcours récursif des champs enfants
+        children = [v for v in self.__dict__.values() if isinstance(v, AstNode) or isinstance(v, list)]
+        for i, child in enumerate(children):
+            is_child_last = i == len(children) - 1
+            new_indent = indent + ("    " if is_last else "│   ")
+
+            if isinstance(child, AstNode):
+                lines.append(child.pretty(new_indent, is_child_last))
+            elif isinstance(child, list):
+                for j, elem in enumerate(child):
+                    is_elem_last = j == len(child) - 1
+                    if isinstance(elem, AstNode):
+                        lines.append(elem.pretty(new_indent, is_elem_last))
+                    else:
+                        lines.append(new_indent + ("└── " if is_elem_last else "├── ") + str(elem))
+
+        return "\n".join(lines)
+
 
 
 @dataclass

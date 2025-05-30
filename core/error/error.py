@@ -34,5 +34,34 @@ class Error:
         return "error: unhandled error occurred"
 
     @staticmethod
-    def build_parser_error_msg() -> str:
-        return ""
+    def build_parser_error_msg(error: SyntaxError, buffer: str) -> str:
+        # Extrait le token depuis le message d'erreur
+        import re
+        match = re.search(r"Token\(type=TokenType\.(\w+), position=(\d+), length=(\d+), value='([^']*)'\)", str(error))
+        if not match:
+            return f"error: {error}"
+
+        token_type, pos, length, value = match.groups()
+        pos = int(pos)
+        length = int(length)
+
+        lines = buffer[:pos].splitlines()
+        line = len(lines) if lines else 1
+        col = len(lines[-1]) + 1 if lines else 1
+
+        line_start = buffer.rfind('\n', 0, pos) + 1
+        line_end = buffer.find('\n', pos)
+        if line_end == -1:
+            line_end = len(buffer)
+
+        snippet = buffer[line_start:line_end]
+        caret_line = ' ' * (col - 1) + '^'
+        msg = (
+            f"error: unexpected token '{value}'\n"
+            f" --> input:{line}:{col}\n"
+            f"  |\n"
+            f"{line} | {snippet}\n"
+            f"  | {caret_line}"
+        )
+
+        return msg

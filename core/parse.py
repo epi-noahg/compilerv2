@@ -18,11 +18,16 @@ def parse(buffer: str) -> str:
     grammar = PRODUCTIONS
     lexer = Lexer(buffer)
     tokens = lexer.scan()
+    
     if lexer.scan_state == ScanState.FAILURE:
         return Error.build_lexer_error_msg(lexer)
-    parser = Parser(tokens)
-    ast = parser.parse(debug=True)
-    return f"{ast}"
+
+    try:
+        parser = Parser(tokens)
+        ast = parser.parse()
+        return ast.pretty()
+    except SyntaxError as e:
+        return Error.build_parser_error_msg(e, lexer.buffer)
 
 
 def print_action_goto(action, goto_table):

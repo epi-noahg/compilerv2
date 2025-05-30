@@ -850,7 +850,7 @@
         "kind": 6,
         "importPath": "core.parser.ast",
         "description": "core.parser.ast",
-        "peekOfCode": "class AstNode:\n    \"\"\"Base class for all AST nodes.\"\"\"\n    pass\n@dataclass\nclass Identifier(AstNode):\n    token: Token\n    def __str__(self):\n        return f\"Identifier({self.token.text})\"\n@dataclass\nclass Literal(AstNode):",
+        "peekOfCode": "class AstNode:\n    def pretty(self, indent: str = \"\", is_last: bool = True) -> str:\n        lines = []\n        prefix = indent + (\"└── \" if is_last else \"├── \")\n        lines.append(prefix + self.__class__.__name__)\n        # Parcours récursif des champs enfants\n        children = [v for v in self.__dict__.values() if isinstance(v, AstNode) or isinstance(v, list)]\n        for i, child in enumerate(children):\n            is_child_last = i == len(children) - 1\n            new_indent = indent + (\"    \" if is_last else \"│   \")",
         "detail": "core.parser.ast",
         "documentation": {}
     },
@@ -1039,7 +1039,7 @@
         "kind": 2,
         "importPath": "core.parse",
         "description": "core.parse",
-        "peekOfCode": "def parse(buffer: str) -> str:\n    grammar = PRODUCTIONS\n    lexer = Lexer(buffer)\n    tokens = lexer.scan()\n    if lexer.scan_state == ScanState.FAILURE:\n        return Error.build_lexer_error_msg(lexer)\n    parser = Parser(tokens)\n    ast = parser.parse(debug=True)\n    return f\"{ast}\"\ndef print_action_goto(action, goto_table):",
+        "peekOfCode": "def parse(buffer: str) -> str:\n    grammar = PRODUCTIONS\n    lexer = Lexer(buffer)\n    tokens = lexer.scan()\n    if lexer.scan_state == ScanState.FAILURE:\n        return Error.build_lexer_error_msg(lexer)\n    try:\n        parser = Parser(tokens)\n        ast = parser.parse()\n        return ast.pretty()",
         "detail": "core.parse",
         "documentation": {}
     },

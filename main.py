@@ -18,7 +18,6 @@ def main():
         sys.exit(1)
     except Exception as err:
         print(f"error: {err}")
-        traceback.print_exc()
         sys.exit(1)
 
 
