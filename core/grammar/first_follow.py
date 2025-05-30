@@ -2,7 +2,7 @@ from core.lexer.token import TokenType
 from core.grammar.production import Production
 from core.grammar.production import Symbol
 
-def compute_first_follow(grammar: list[Production]) -> (dict[str, set[TokenType]], dict[str, set[TokenType]]):
+def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]], dict[str, set[TokenType]]]:
     # Initialisation
     first: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}
     follow: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}
