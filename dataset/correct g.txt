@@ -1,11 +1,12 @@
 type id(type id)
 {
-    if (id)
-        if (id)
+    if (id) {
+        if (id) {
             id = id;
-        else
-            id = id;
-    else
-        id = id;
+            }
+
+    else {
+        id = id + - id + id;
+        }}
     return id;
 }
