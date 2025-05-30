@@ -1,0 +1,4 @@
+type id(type id, type id)
+{
+    num = id;
+}

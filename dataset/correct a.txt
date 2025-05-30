@@ -1,5 +1,1 @@
-type id(type id, type id)
-{
-    type id = id + id * id;
-    return id;
-}
+type id;

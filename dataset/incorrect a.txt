@@ -2,6 +2,5 @@ type id(type id)
 {
     for (id = id; id == id; id = id + id)
         while (id)
-            id = id * id;
-    return id;
+            return id;
 }

@@ -1,5 +1,9 @@
-type id(type id)
-{
-    if (id)
-        return id;
+type id() {
+  if (id) {
+    if (id) {
+      type id = id();
+    } else {
+      type id = num;
+    }
+  }
 }

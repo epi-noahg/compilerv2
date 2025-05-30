@@ -1,4 +1,4 @@
-type id(type id)
+type id(num id)
 {
     for (id; id == id; id)
         while (id)

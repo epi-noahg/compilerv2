@@ -130,10 +130,9 @@ PRODUCTIONS: list[Production] = [
     Production('VarDecl', (TokenType.TYPE, TokenType.IDENTIFIER, TokenType.SEMICOLON)),
     Production('VarDecl', (TokenType.TYPE, TokenType.IDENTIFIER, TokenType.ASSIGN, 'Expr', TokenType.SEMICOLON)),
     Production('FuncDecl', (TokenType.TYPE, TokenType.IDENTIFIER, TokenType.LEFT_PAREN, 'ParamList', TokenType.RIGHT_PAREN, 'Block')),
-    Production('ParamList', ('Param', 'ParamTail')),
+    Production('ParamList', ('Param', TokenType.COMMA, 'ParamList')),
+    Production('ParamList', ('Param',)),
     Production('ParamList', ()),
-    Production('ParamTail', (TokenType.COMMA, 'Param', 'ParamTail')),
-    Production('ParamTail', ()),
     Production('Param', (TokenType.TYPE, TokenType.IDENTIFIER)),
     Production('Block', (TokenType.LEFT_BRACE, 'StmtList', TokenType.RIGHT_BRACE)),
     Production('StmtList', ('Stmt', 'StmtList')),
@@ -762,108 +761,84 @@ def goto(I: set[Item], X: Symbol, grammar: list[Production]) -> set[Item]:
             moved.add(Item(item.production, item.dot + 1))
     # Compute the closure of the new set
     return closure(moved, grammar)
-
-def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]], dict[str, set[TokenType]]]:
+def compute_first_follow(grammar: list[Production]) -> tuple[dict[str, set[TokenType]],
+                                                            dict[str, set[TokenType]]]:
     """
-    Computes the FIRST and FOLLOW sets for all non-terminals in the grammar.
-
-    These sets are essential for constructing predictive parsers and for resolving
-    conflicts in LR parsing tables:
-
-    - FIRST(X): The set of terminals that can appear as the first symbol of any
-      string derived from X.
-    - FOLLOW(X): The set of terminals that can appear immediately after X in some
-      sentential form.
-
-    The algorithm also computes which non-terminals are nullable (can derive the
-    empty string).
-
-    Args:
-        grammar: The list of grammar productions
-
-    Returns:
-        A tuple containing:
-        - first: Dictionary mapping non-terminals to their FIRST sets
-        - follow: Dictionary mapping non-terminals to their FOLLOW sets
+    Build FIRST and FOLLOW sets for every non-terminal in the grammar.
+    Terminals are never nullable.
     """
-    # Initialize FIRST and FOLLOW sets for all non-terminals
-    first: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}
-    follow: dict[str, set[TokenType]] = {p.lhs: set() for p in grammar}
-    nullable: dict[str, bool] = {p.lhs: False for p in grammar}
+    # --- helpers ------------------------------------------------------------
+    def is_terminal(sym: Symbol) -> bool:
+        return isinstance(sym, TokenType)
 
-    # Add EOF to FOLLOW set of the start symbol
+    # --- init ---------------------------------------------------------------
+    non_terms = {p.lhs for p in grammar}
+    first: dict[str, set[TokenType]]   = {nt: set() for nt in non_terms}
+    follow: dict[str, set[TokenType]]  = {nt: set() for nt in non_terms}
+    nullable: dict[str, bool]          = {nt: False  for nt in non_terms}
+
     start = grammar[0].lhs
     follow[start].add(TokenType.EOF)
 
-    # Compute nullable non-terminals
+    # --- nullable -----------------------------------------------------------
     changed = True
     while changed:
         changed = False
         for p in grammar:
-            # Empty production means the non-terminal is nullable
             if not p.rhs:
                 if not nullable[p.lhs]:
                     nullable[p.lhs] = True
                     changed = True
-            # If all symbols in the production are nullable, the LHS is nullable
-            elif all((isinstance(sym, str) and nullable.get(sym, False)) or isinstance(sym, TokenType) for sym in p.rhs):
+                continue
+
+            if all((not is_terminal(sym)) and nullable[sym] for sym in p.rhs):
                 if not nullable[p.lhs]:
                     nullable[p.lhs] = True
                     changed = True
 
-    # Compute FIRST sets
+    # --- FIRST --------------------------------------------------------------
     changed = True
     while changed:
         changed = False
         for p in grammar:
             lhs = p.lhs
-            rhs = p.rhs
-            trailer = set()
-            for sym in rhs:
-                # If we find a terminal, add it to FIRST and stop
-                if isinstance(sym, TokenType):
+            for sym in p.rhs:
+                if is_terminal(sym):
                     if sym not in first[lhs]:
                         first[lhs].add(sym)
                         changed = True
                     break
                 else:
-                    # Add FIRST(sym) to FIRST(lhs)
                     before = len(first[lhs])
                     first[lhs].update(first[sym])
-                    if before != len(first[lhs]):
+                    if len(first[lhs]) != before:
                         changed = True
-                    # If sym is not nullable, stop here
                     if not nullable[sym]:
                         break
-            else:
-                # All symbols in the production are nullable
-                pass
+            # ε handling not needed for FOLLOW computation
 
-    # Compute FOLLOW sets
+    # --- FOLLOW -------------------------------------------------------------
     changed = True
     while changed:
         changed = False
         for p in grammar:
-            # Start with FOLLOW(lhs)
             trailer = follow[p.lhs].copy()
-            # Process the RHS from right to left
             for sym in reversed(p.rhs):
-                if isinstance(sym, TokenType):
-                    # Terminal becomes the new trailer
+                if is_terminal(sym):
                     trailer = {sym}
                 else:
-                    # Add trailer to FOLLOW(sym)
                     before = len(follow[sym])
                     follow[sym].update(trailer)
                     if len(follow[sym]) != before:
                         changed = True
-                    # Update trailer based on whether sym is nullable
-                    if nullable.get(sym, False):
+                    if nullable[sym]:
                         trailer = trailer.union(first[sym])
                     else:
                         trailer = first[sym]
 
+    # print_first_follow(first, follow, grammar, nullable)
     return first, follow
+
 
 
 def build_lr0_states(grammar: list[Production]) -> list[set[Item]]:
@@ -974,7 +949,7 @@ def build_action_goto(states: list[set[Item]], grammar: list[Production], follow
                     # Add the accept action
                     action[(i, TokenType.EOF)] = "accept"
 
-    print_action_goto(action, goto_table)
+    # print_action_goto(action, goto_table)
     return action, goto_table
 
 
@@ -1381,17 +1356,13 @@ class Parser:
 
         # Parameter list
         if p.lhs == "ParamList":
-            if not c:
-                return ParamList([])  # Empty parameter list
-            param, tail = c
-            return ParamList([param] + (tail if isinstance(tail, list) else []))
-
-        # Parameter tail (for handling multiple parameters)
-        if p.lhs == "ParamTail":
-            if not c:
-                return []  # End of parameter list
-            _comma, param, tail = c
-            return [param] + tail  # Add parameter to the list
+            if not c:                               # ε
+                return ParamList([])
+            if len(c) == 1:                         # Param
+                return ParamList([c[0]])
+            # Param , ParamList
+            param, _comma, rest = c
+            return ParamList([param] + rest.params)
 
         # Parameter
         if p.lhs == "Param":
@@ -1525,23 +1496,25 @@ def parse(buffer: str) -> str:
 
 SYMBOL_MAP = {
     TokenType.IDENTIFIER: 'id',
-    TokenType.NUMBER: 'num',
-    TokenType.SEMICOLON: ';',
-    TokenType.COMMA: ',',
+    TokenType.NUMBER:     'num',
+    TokenType.SEMICOLON:  ';',
+    TokenType.COMMA:      ',',
     TokenType.LEFT_PAREN: '(',
-    TokenType.RIGHT_PAREN: ')',
+    TokenType.RIGHT_PAREN:')',
     TokenType.LEFT_BRACE: '{',
-    TokenType.RIGHT_BRACE: '}',
-    TokenType.PLUS: '+',
-    TokenType.MINUS: '-',
-    TokenType.MULTIPLY: '*',
-    TokenType.COMPARE: '==',
-    TokenType.ASSIGN: '=',
-    TokenType.EOF: '$',
+    TokenType.RIGHT_BRACE:'}',
+    TokenType.PLUS:       '+',
+    TokenType.MINUS:      '-',
+    TokenType.MULTIPLY:   '*',
+    TokenType.COMPARE:    '==',
+    TokenType.ASSIGN:     '=',
+    TokenType.EOF:        '$',
 }
 
 def _tok(sym):
-    return SYMBOL_MAP.get(sym, sym.name if hasattr(sym, "name") else str(sym))
+    if isinstance(sym, TokenType):
+        return SYMBOL_MAP.get(sym, sym.name.lower())
+    return str(sym)
 
 def print_action_table(action):
     rows = [ (state, _tok(term), act)
@@ -1580,3 +1553,39 @@ def print_goto_table(goto_table):
 def print_action_goto(action, goto_table):
     print_action_table(action)
     print_goto_table(goto_table)
+
+def _cfg_order(grammar):
+    seen, order = set(), []
+    for prod in grammar:
+        if prod.lhs not in seen:
+            order.append(prod.lhs)
+            seen.add(prod.lhs)
+    return order
+
+def print_first_sets(first, grammar, nullable):
+    order = _cfg_order(grammar)
+    w_nt  = max(len("NonT"), max(len(nt) for nt in order))
+
+    print("\n=== FIRST SETS ===")
+    print(f"{'NonT'.ljust(w_nt)} | FIRST")
+    print(f"{'-'*w_nt}-+------")
+    for nt in order:
+        elems = [_tok(t) for t in sorted(first[nt], key=lambda x: getattr(x,'value',str(x)))]
+        if nullable.get(nt, False):
+            elems.append('ε')
+        print(f"{nt.ljust(w_nt)} | {', '.join(elems)}")
+
+def print_follow_sets(follow, grammar):
+    order = _cfg_order(grammar)
+    w_nt  = max(len("NonT"), max(len(nt) for nt in order))
+
+    print("\n=== FOLLOW SETS ===")
+    print(f"{'NonT'.ljust(w_nt)} | FOLLOW")
+    print(f"{'-'*w_nt}-+-------")
+    for nt in order:
+        elems = [_tok(t) for t in sorted(follow[nt], key=lambda x: x.value)]
+        print(f"{nt.ljust(w_nt)} | {', '.join(elems)}")
+
+def print_first_follow(first, follow, grammar, nullable):
+    print_first_sets(first, grammar, nullable)
+    print_follow_sets(follow, grammar)

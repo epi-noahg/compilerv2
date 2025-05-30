@@ -1,6 +1,15 @@
-type id;
-type id(type id)
-{
-    type id = id;
+type id() {
+  type id = num;
+  if (id == num) {
     return id;
+  } else {
+    id = num;
+  }
+  for (id; id == num; id) {
+    type id = id(num);
+  }
+  while (id == num) {
+    type id = id();
+  }
+  return id + num * num;
 }
